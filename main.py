@@ -1,49 +1,30 @@
-tasks = []
-
-def add_task(title):
-    tasks.append({"title": title, "done": False})
-
-def list_tasks():
-    if not tasks:
-        print("No tasks yet.")
-        return
-    for i, task in enumerate(tasks):
-        status = "✓" if task["done"] else " "
-        print(f"{i+1}. [{status}] {task['title']}")
-
-def complete_task(index):
-    if 0 <= index < len(tasks):
-        tasks[index]["done"] = True
-
-def delete_task(index):
-    if 0 <= index < len(tasks):
-        tasks.pop(index)
-
 def main():
+    print("=== Task Manager ===")
+    tasks = []
+
     while True:
         print("\n1. Add task")
-        print("2. List tasks")
-        print("3. Complete task")
-        print("4. Delete task")
-        print("0. Exit")
+        print("2. View tasks")
+        print("3. Exit")
 
-        choice = input("Choose: ")
+        choice = input("Choose an option: ")
 
         if choice == "1":
-            title = input("Task title: ")
-            add_task(title)
+            task = input("Enter a new task: ")
+            tasks.append(task)
+            print("Task added!")
         elif choice == "2":
-            list_tasks()
+            if not tasks:
+                print("No tasks yet.")
+            else:
+                print("Your tasks:")
+                for i, task in enumerate(tasks, 1):
+                    print(f"{i}. {task}")
         elif choice == "3":
-            idx = int(input("Task number: ")) - 1
-            complete_task(idx)
-        elif choice == "4":
-            idx = int(input("Task number: ")) - 1
-            delete_task(idx)
-        elif choice == "0":
+            print("Goodbye!")
             break
         else:
-            print("Invalid option")
+            print("Invalid option, try again.")
 
 if __name__ == "__main__":
     main()
